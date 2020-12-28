@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:timetracker_flutter/page_intervals.dart';
 import 'package:timetracker_flutter/tree.dart' hide getTree;
+import 'dart:async';
+
 // the old getTree()
 import 'package:timetracker_flutter/requests.dart';
 // has the new getTree() that sends an http request to the server
 
-
-
 class PageActivities extends StatefulWidget {
   int id;
+
   PageActivities(this.id);
 
   @override
@@ -18,6 +19,8 @@ class PageActivities extends StatefulWidget {
 class _PageActivitiesState extends State<PageActivities> {
   int id;
   Future<Tree> futureTree;
+  Timer _timer;
+  static const int periodeRefresh = 4;
 
   @override
   void initState() {
@@ -25,8 +28,8 @@ class _PageActivitiesState extends State<PageActivities> {
     super.initState();
     id = widget.id;
     futureTree = getTree(id);
+    _activateTimer();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +45,14 @@ class _PageActivitiesState extends State<PageActivities> {
               actions: <Widget>[
                 IconButton(
                     icon: Icon(Icons.home),
-                    onPressed: () {} // TODO go home page = root
-                    ),
+                    onPressed: () {
+                      while (Navigator.of(context).canPop()) {
+                        print("pop");
+                        Navigator.of(context).pop();
+                      }
+
+                      PageActivities(0);
+                    }),
                 //TODO other actions
               ],
             ),
@@ -91,20 +100,58 @@ class _PageActivitiesState extends State<PageActivities> {
         title: Text('${activity.name}'),
         trailing: trailing,
         onTap: () => _navigateDownIntervals(activity.id),
-        onLongPress: () {}, // TODO start/stop counting the time for tis task
+        onLongPress: () {
+          if ((activity as Task).active) {
+            stop(activity.id);
+            _refresh();
+          } else {
+            start(activity.id);
+            _refresh();
+          }
+        }, // TODO start/stop counting the time for tis task
       );
     }
   }
 
   void _navigateDownActivities(int childId) {
-    Navigator.of(context).push(MaterialPageRoute<void>(
+    Navigator.of(context)
+        .push(MaterialPageRoute<void>(
       builder: (context) => PageActivities(childId),
-    ));
+    ))
+        .then((var value) {
+      _activateTimer();
+      _refresh();
+    });
   }
 
   void _navigateDownIntervals(int childId) {
-    Navigator.of(context).push(MaterialPageRoute<void>(
+    Navigator.of(context)
+        .push(MaterialPageRoute<void>(
       builder: (context) => PageIntervals(childId),
-    ));
+    ))
+        .then((var value) {
+      _activateTimer();
+      _refresh();
+    });
+  }
+
+  void _refresh() async {
+    futureTree = getTree(id); // to be used in build()
+    setState(() {});
+  }
+
+  void _activateTimer() {
+    _timer = Timer.periodic(Duration(seconds: periodeRefresh), (Timer t) {
+      futureTree = getTree(id);
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    // "The framework calls this method when this State object will never build again"
+    // therefore when going up
+    _timer.cancel();
+    super.dispose();
   }
 }

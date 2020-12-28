@@ -17,17 +17,17 @@ abstract class Activity {
   Activity.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         name = json['name'],
-        initialDate = json['initialDate']==null ? null : _dateFormatter.parse(json['initialDate']),
-        finalDate = json['finalDate']==null ? null : _dateFormatter.parse(json['finalDate']),
+        initialDate = json['startTime']=='null' ? null : _dateFormatter.parse(json['startTime']),
+        finalDate = json['endTime']=='null' ? null : _dateFormatter.parse(json['endTime']),
         duration = json['duration'];
 }
 
 
 class Project extends Activity {
   Project.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
-    if (json.containsKey('activities')) {
+    if (json.containsKey('trackers')) {
       // json has only 1 level because depth=1 or 0 in time_tracker
-      for (Map<String, dynamic> jsonChild in json['activities']) {
+      for (Map<String, dynamic> jsonChild in json['trackers']) {
         if (jsonChild['class'] == "project") {
           children.add(Project.fromJson(jsonChild));
           // condition on key avoids infinite recursion
@@ -46,7 +46,7 @@ class Task extends Activity {
   bool active;
   Task.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
     active = json['active'];
-    for (Map<String, dynamic> jsonChild in json['intervals']) {
+    for (Map<String, dynamic> jsonChild in json['listIntervals']) {
       children.add(Interval.fromJson(jsonChild));
     }
   }
@@ -62,8 +62,8 @@ class Interval {
 
   Interval.fromJson(Map<String, dynamic> json)
       : id = json['id'],
-        initialDate = json['initialDate']==null ? null : _dateFormatter.parse(json['initialDate']),
-        finalDate = json['finalDate']==null ? null : _dateFormatter.parse(json['finalDate']),
+        initialDate = json['startTime']=='null' ? null : _dateFormatter.parse(json['startTime']),
+        finalDate = json['endTime']=='null' ? null : _dateFormatter.parse(json['endTime']),
         duration = json['duration'],
         active = json['active'];
 }

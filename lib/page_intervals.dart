@@ -4,6 +4,8 @@ import 'package:timetracker_flutter/tree.dart' as Tree hide getTree;
 // to avoid collision with an Interval class in another library
 import 'package:timetracker_flutter/requests.dart';
 
+import 'page_activities.dart';
+
 class PageIntervals extends StatefulWidget {
   int id;
 
@@ -39,9 +41,15 @@ class _PageIntervalsState extends State<PageIntervals> {
               title: Text(snapshot.data.root.name),
               actions: <Widget>[
                 IconButton(
-                  icon: Icon(Icons.home),
-                  onPressed: () {}, // TODO
-                )
+                    icon: Icon(Icons.home),
+                    onPressed: () {
+                      while (Navigator.of(context).canPop()) {
+                        print("pop");
+                        Navigator.of(context).pop();
+                      }
+
+                      PageActivities(0);
+                    })
               ],
             ),
             body: ListView.separated(
