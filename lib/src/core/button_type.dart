@@ -1,0 +1,1 @@
+enum ButtonType {project, pausedTask, playingTask}
