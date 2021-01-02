@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:timetracker_flutter/src/view/task_project_card_view.dart';
-
+import 'package:timetracker_flutter/src/main_page.dart';
 void main() {
   runApp(MyApp());
 }
@@ -16,10 +15,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage('Flutter Demo Home Page'),
+      home: MainPage(),
     );
   }
 }
+
+
+
 
 //Clases para saber que tipo de accion se esta haciendo
 abstract class CounterEvent {}
@@ -89,7 +91,7 @@ class HomePage extends StatelessWidget {
               'You have pushed the button this many times:',
             ),
             PlayerButtonView(type: ButtonType.pausedTask),
-            TaskProjectCardView(),
+            //TaskProjectCardView(),
             StreamBuilder<int>(
               initialData: 0, //Si no quieres que salga el null en la etiqueta.
               stream: bloc.counterStream,

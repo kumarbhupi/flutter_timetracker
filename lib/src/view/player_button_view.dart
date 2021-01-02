@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:timetracker_flutter/src/core/button_type.dart';
+import 'package:timetracker_flutter/src/core/acitivity_type.dart';
 
 class PlayerButtonView extends StatelessWidget {
-  final ButtonType type;
+  final ActivityType type;
   PlayerButtonView({@required this.type});
 
   @override
   Widget build(BuildContext context) {
     switch(type){
-      case ButtonType.project:{
+      case ActivityType.project:{
         return RaisedButton(
           onPressed:(){},
           textColor: Colors.black,
@@ -18,7 +18,7 @@ class PlayerButtonView extends StatelessWidget {
 
       }
       break;
-      case  ButtonType.pausedTask: {
+      case  ActivityType.pausedTask: {
         return RaisedButton(
           onPressed:(){},
           textColor: Colors.black,
@@ -27,7 +27,7 @@ class PlayerButtonView extends StatelessWidget {
         );
       }
       break;
-      case ButtonType.playingTask : {
+      case ActivityType.playingTask : {
         return RaisedButton(
           onPressed:(){},
           textColor: Colors.black,

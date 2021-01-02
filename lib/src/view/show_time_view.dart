@@ -1,38 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:timetracker_flutter/src/core/button_type.dart';
+import 'package:timetracker_flutter/src/core/acitivity_type.dart';
+import 'package:timetracker_flutter/src/core/core.dart';
 
 class ShowTimeView extends StatelessWidget {
-  final ButtonType type;
-  ShowTimeView({@required this.type});
+  final ActivityType type;
+  final dynamic activity;
+  ShowTimeView({@required this.type, this.activity});
   @override
   Widget build(BuildContext context) {
     switch(type){
-      case ButtonType.project : {
+      case ActivityType.project : {
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Start'),
-            Text('2020-10-4 09:47:03'),
+            Text('${(activity as Activity).initialDate}'),
             SizedBox(height: 10.0),
             Text('Last modification'),
-            Text('2020-10-4 12:53:03'),
+            Text('${(activity as Activity).finalDate}'),
             SizedBox(height: 10.0),
           ],
         );
 
       }
       break;
-      case ButtonType.pausedTask : {
+      case ActivityType.pausedTask : {
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Start'),
-            Text('2020-10-4 09:47:03'),
+            Text('${(activity as Activity).initialDate}'),
             SizedBox(height: 10.0),
             Text('Last modification'),
-            Text('2020-10-4 12:53:03'),
+            Text('${(activity as Activity).finalDate}'),
             SizedBox(height: 10.0),
             Row(
               children: [
@@ -52,16 +54,16 @@ class ShowTimeView extends StatelessWidget {
 
       }
       break;
-      case ButtonType.playingTask : {
+      case ActivityType.playingTask : {
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Start'),
-            Text('2020-10-4 09:47:03'),
+            Text('${(activity as Activity).initialDate}'),
             SizedBox(height: 10.0),
             Text('Last modification'),
-            Text('2020-10-4 12:53:03'),
+            Text('${(activity as Activity).finalDate}'),
             SizedBox(height: 10.0),
             Row(
               children: [
