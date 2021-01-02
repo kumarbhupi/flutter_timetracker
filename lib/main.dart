@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:timetracker_flutter/src/view/task_project_card_view.dart';
 
 
 void main() {
@@ -85,6 +86,7 @@ class HomePage extends StatelessWidget {
               'You have pushed the button this many times:',
             ),
             PlayerButtonView(type: ButtonType.pausedTask),
+            TaskProjectCardView(),
             StreamBuilder<int>(
               initialData: 0, //Si no quieres que salga el null en la etiqueta.
               stream: bloc.counterStream,

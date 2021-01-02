@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:timetracker_flutter/src/core/button_type.dart';
 
-class PayerButtonView extends StatelessWidget {
+class PlayerButtonView extends StatelessWidget {
   final ButtonType type;
-  PayerButtonView({@required this.type});
+  PlayerButtonView({@required this.type});
 
   @override
   Widget build(BuildContext context) {
