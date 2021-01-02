@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class TotalTime extends StatelessWidget {
+class TotalTimeDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
@@ -12,7 +12,7 @@ class TotalTime extends StatelessWidget {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Total Time'),
-            content: Text('_____________'),
+            content: Text('___________________'),
             actions: <Widget>[
               TextButton(
                 child: Text('Close'),
@@ -28,7 +28,7 @@ class TotalTime extends StatelessWidget {
 
     return FloatingActionButton(
       onPressed: _showMyDialog,
-      child : Text('Reloj'),//TODO poner dibujo reloj
+      child : Icon(Icons.access_alarm),
     );
   }
 }
