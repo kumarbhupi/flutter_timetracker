@@ -95,7 +95,7 @@ class _ActivityCardViewLState extends State<ActivityCardViewL> {
                       ],
                     ),
                     ShowTimeView(
-                      type: ActivityType.project,
+                      type: ActivityType.playingTask,
                       activity: activity,
                     ),
                     Container(
@@ -133,7 +133,7 @@ class _ActivityCardViewLState extends State<ActivityCardViewL> {
                       ],
                     ),
                     ShowTimeView(
-                      type: ActivityType.project,
+                      type: ActivityType.pausedTask,
                       activity: activity,
                     ),
                     Container(
@@ -231,7 +231,7 @@ class ActivityCardView extends StatelessWidget {
                     ],
                   ),
                   ShowTimeView(
-                    type: ActivityType.project,
+                    type: ActivityType.playingTask,
                     activity: activity,
                   ),
                   Container(
@@ -269,7 +269,7 @@ class ActivityCardView extends StatelessWidget {
                     ],
                   ),
                   ShowTimeView(
-                    type: ActivityType.project,
+                    type: ActivityType.pausedTask,
                     activity: activity,
                   ),
                   Container(
