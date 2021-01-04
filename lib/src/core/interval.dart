@@ -11,10 +11,10 @@ class Interval {
 
   Interval.fromJson(Map<String, dynamic> json)
       : id = json['id'],
-        initialDate = json['startTime']=='-' ? null : dateFormatter.parse(json['startTime']),
-        finalDate = json['endTime']=='-' ? null : dateFormatter.parse(json['endTime']),
-        initialString = json['startTime']=='-' ? null : json['startTime'],
-        finalString = json['endTime']=='-' ? null : json['endTime'],
+        initialDate = json['startTime']=='null' ? null : dateFormatter.parse(json['startTime']),
+        finalDate = json['endTime']=='null' ? null : dateFormatter.parse(json['endTime']),
+        initialString = json['startTime']=='null' ? '-' : json['startTime'],
+        finalString = json['endTime']=='null' ? '-' : json['endTime'],
         duration = json['duration'],
         active = json['active'];
 }

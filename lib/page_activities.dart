@@ -5,7 +5,6 @@ import 'package:timetracker_flutter/src/view/view.dart';
 import 'package:timetracker_flutter/src/services/services.dart';
 import 'dart:async';
 
-
 class PageActivities extends StatefulWidget {
   int id;
 
@@ -43,13 +42,12 @@ class _PageActivitiesState extends State<PageActivities> {
               title: Text(snapshot.data.root.name),
               actions: <Widget>[
                 IconButton(
-                    icon: Icon(Icons.home),
+                    icon: Icon(Icons.search),
                     onPressed: () {
                       while (Navigator.of(context).canPop()) {
                         print("pop");
                         Navigator.of(context).pop();
                       }
-
                       PageActivities(0);
                     }),
                 //TODO other actions
@@ -83,7 +81,12 @@ class _PageActivitiesState extends State<PageActivities> {
         Duration(seconds: activity.duration).toString().split('.').first;
     // split by '.' and taking first element of resulting list removes the microseconds part
     if (activity is Project) {
-      return ActivityCardView(type: ActivityType.project, activity: activity , onPressAction: () =>_navigateDownActivities(activity.id),);
+      return ActivityCardView(
+        type: ActivityType.project,
+        activity: activity,
+        onPressCard: () => _navigateDownActivities(activity.id),
+        onPressButton: () {},
+      );
       return ListTile(
         title: Text('${activity.name}'),
         trailing: Text('$strDuration'),
@@ -94,11 +97,46 @@ class _PageActivitiesState extends State<PageActivities> {
       // at the moment is the same, maybe changes in the future
       Widget trailing;
       trailing = Text('$strDuration');
-      return ActivityCardView(type: ActivityType.pausedTask, activity: activity , onPressAction: () =>_navigateDownIntervals(activity.id));
+
+      if(((activity as Task).active)){
+        return ActivityCardView(
+          type: ActivityType.playingTask,
+          activity: activity,
+          onPressCard: () => _navigateDownIntervals(activity.id,(activity as Task).active),
+          onPressButton: () {
+            stop(activity.id);
+            _refresh();
+          },
+        );
+      }else{
+        return ActivityCardView(
+          type: ActivityType.pausedTask,
+          activity: activity,
+          onPressCard: () => _navigateDownIntervals(activity.id, (activity as Task).active),
+          onPressButton: () {
+            start(activity.id);
+            _refresh();
+          },
+        );
+      }
+      return ActivityCardView(
+        type: ActivityType.pausedTask,
+        activity: activity,
+        onPressCard: () => _navigateDownIntervals(activity.id, (activity as Task).active),
+        onPressButton: () {
+          if ((activity as Task).active) {
+            stop(activity.id);
+            _refresh();
+          } else {
+            start(activity.id);
+            _refresh();
+          }
+        },
+      );
       return ListTile(
         title: Text('${activity.name}'),
         trailing: trailing,
-        onTap: () => _navigateDownIntervals(activity.id),
+        onTap: () => _navigateDownIntervals(activity.id, (activity as Task).active),
         onLongPress: () {
           if ((activity as Task).active) {
             stop(activity.id);
@@ -123,10 +161,10 @@ class _PageActivitiesState extends State<PageActivities> {
     });
   }
 
-  void _navigateDownIntervals(int childId) {
+  void _navigateDownIntervals(int childId, bool active) {
     Navigator.of(context)
         .push(MaterialPageRoute<void>(
-      builder: (context) => PageIntervals(childId),
+      builder: (context) => PageIntervals(childId, active),
     ))
         .then((var value) {
       _activateTimer();

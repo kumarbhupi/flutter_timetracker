@@ -4,6 +4,7 @@ import 'package:timetracker_flutter/src/core/core.dart';
 import 'package:timetracker_flutter/src/core/interval.dart' as myInterval;
 import 'package:timetracker_flutter/src/view/view.dart';
 import 'package:timetracker_flutter/src/services/services.dart';
+import 'dart:async';
 
 // to avoid collision with an Interval class in another library
 
@@ -12,8 +13,9 @@ import 'package:timetracker_flutter/src/services/services.dart';
 
 class PageIntervals extends StatefulWidget {
   int id;
+  bool active;
 
-  PageIntervals(this.id);
+  PageIntervals(this.id, this.active);
 
   @override
   _PageIntervalsState createState() => _PageIntervalsState();
@@ -23,12 +25,29 @@ class _PageIntervalsState extends State<PageIntervals> {
   int id;
   Future<Tree> futureTree;
   Tree tree;
+  Timer _timer;
+  static const int refreshPeriod = 2;
 
   @override
   void initState() {
     super.initState();
     id = widget.id;
     futureTree = getTree(id);
+    _activateTimer();
+
+  }
+
+  void _activateTimer() {
+    _timer = Timer.periodic(Duration(seconds: refreshPeriod), (Timer t) {
+      futureTree = getTree(id);
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   @override

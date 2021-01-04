@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:timetracker_flutter/src/core/acitivity_type.dart';
+import 'package:timetracker_flutter/src/core/activity_type.dart';
 import 'package:timetracker_flutter/src/core/core.dart';
 
 
