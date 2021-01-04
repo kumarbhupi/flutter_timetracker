@@ -58,7 +58,6 @@ class _PageIntervalsState extends State<PageIntervals> {
             ),
             body: ListView.separated(
               // it's like ListView.builder() but better because it includes a separator between items
-              padding: const EdgeInsets.all(16.0),
               itemCount: numChildren,
               itemBuilder: (BuildContext context, int index) =>
                   _buildRow(snapshot.data.root.children[index], index),
@@ -86,6 +85,7 @@ class _PageIntervalsState extends State<PageIntervals> {
     String strInitialDate = interval.initialDate.toString().split('.')[0];
     // this removes the microseconds part
     String strFinalDate = interval.finalDate.toString().split('.')[0];
+    return IntervalCardView(activity: interval, number : index);
     return ListTile(
       title: Text('from ${strInitialDate} to ${strFinalDate}'),
       trailing: Text('$strDuration'),

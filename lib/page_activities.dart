@@ -94,7 +94,7 @@ class _PageActivitiesState extends State<PageActivities> {
       // at the moment is the same, maybe changes in the future
       Widget trailing;
       trailing = Text('$strDuration');
-      return IntervalCardView(activity: activity,);
+      return ActivityCardView(type: ActivityType.pausedTask, activity: activity , onPressAction: () =>_navigateDownIntervals(activity.id));
       return ListTile(
         title: Text('${activity.name}'),
         trailing: trailing,

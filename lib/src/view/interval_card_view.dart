@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:timetracker_flutter/src/core/core.dart';
+import 'package:timetracker_flutter/src/core/interval.dart' as myInterval;
 
 class IntervalCardView extends StatelessWidget {
-  IntervalCardView({this.activity});
-
+  IntervalCardView({this.activity, this.number});
+  final int number;
   final dynamic activity;
 
   @override
@@ -17,7 +17,7 @@ class IntervalCardView extends StatelessWidget {
             margin: EdgeInsets.all(15.0),
             padding: EdgeInsets.all(10.0),
             child: Text(
-              "Interval X",
+              "Interval $number",
               style: TextStyle(
                   fontSize: 30.0
               ),
@@ -39,9 +39,9 @@ class IntervalCardView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('${(activity as Activity).initialString}'),
-              Text('${(activity as Activity).finalString}'),
-              Text('${(activity as Activity).duration}'),
+              Text('${(activity as myInterval.Interval).initialString}'),
+              Text('${(activity as myInterval.Interval).finalString}'),
+              Text('${(activity as myInterval.Interval).duration}'),
             ],
           )
         ],
