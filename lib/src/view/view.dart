@@ -6,3 +6,4 @@ export 'package:timetracker_flutter/src/view/activity_name_view.dart';
 export 'package:timetracker_flutter/src/view/tag_card_view.dart';
 export 'package:timetracker_flutter/src/view/activity_card_view.dart';
 export 'package:timetracker_flutter/src/view/list_activities_view.dart';
+export 'package:timetracker_flutter/src/view/list_interval_view.dart';

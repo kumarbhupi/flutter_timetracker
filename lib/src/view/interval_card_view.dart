@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:timetracker_flutter/src/core/core.dart';
 
 class IntervalCardView extends StatelessWidget {
+  IntervalCardView({this.activity});
+
+  final dynamic activity;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -34,10 +39,9 @@ class IntervalCardView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //TODO: DO THE CHANGES TO POPULATE THIS DATA DYNAMICALLY
-              Text('2020-10-4 09:47:03'),
-              Text('2020-10-4 12:53:03'),
-              Text('03:06:00')
+              Text('${(activity as Activity).initialString}'),
+              Text('${(activity as Activity).finalString}'),
+              Text('${(activity as Activity).duration}'),
             ],
           )
         ],

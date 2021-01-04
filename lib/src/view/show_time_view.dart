@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:timetracker_flutter/src/core/acitivity_type.dart';
 import 'package:timetracker_flutter/src/core/core.dart';
 
+
 class ShowTimeView extends StatelessWidget {
   final ActivityType type;
   final dynamic activity;
@@ -15,10 +16,10 @@ class ShowTimeView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Start'),
-            Text('${(activity as Activity).initialDate}'),
+            Text('${(activity as Activity).initialString}'),
             SizedBox(height: 10.0),
             Text('Last modification'),
-            Text('${(activity as Activity).finalDate}'),
+            Text('${(activity as Activity).finalString}'),
             SizedBox(height: 10.0),
           ],
         );
@@ -31,10 +32,10 @@ class ShowTimeView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Start'),
-            Text('${(activity as Activity).initialDate}'),
+            Text('${(activity as Activity).initialString}'),
             SizedBox(height: 10.0),
             Text('Last modification'),
-            Text('${(activity as Activity).finalDate}'),
+            Text('${(activity as Activity).finalString}'),
             SizedBox(height: 10.0),
             Row(
               children: [
@@ -60,10 +61,10 @@ class ShowTimeView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Start'),
-            Text('${(activity as Activity).initialDate}'),
+            Text('${(activity as Activity).initialString}'),
             SizedBox(height: 10.0),
             Text('Last modification'),
-            Text('${(activity as Activity).finalDate}'),
+            Text('${(activity as Activity).finalString}'),
             SizedBox(height: 10.0),
             Row(
               children: [

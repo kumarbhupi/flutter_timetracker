@@ -8,6 +8,13 @@ class ListActivitiesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _navigateDownIntervals(int childId) {
+      Navigator.of(context)
+          .push(MaterialPageRoute<void>(
+        builder: (context) => ListIntervalView(childId),
+      ));
+    }
+
     return FutureBuilder<Tree>(
         future: _fetchActivitiesBloc.fetchData(),
         builder: (context, snapshot) {
@@ -18,7 +25,7 @@ class ListActivitiesView extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      _buildRow(snapshot.data.root.children[index], index)
+                      _buildCard(snapshot.data.root.children[index], index)
                     ],
                   );
                 });
@@ -26,20 +33,29 @@ class ListActivitiesView extends StatelessWidget {
           if (snapshot.hasError) {
             return Text('No data found');
           }
-          return Text('Default...');
+          return Center(
+            child: CircularProgressIndicator(),
+          );
         });
   }
 
-  Widget _buildRow(Activity activity, int index) {
+  Widget _buildCard(Activity activity, int index) {
     //String strDuration =
     //    Duration(seconds: activity.duration).toString().split('.').first;
     // split by '.' and taking first element of resulting list removes the microseconds part
     if (activity is Project) {
       return ActivityCardView(
-          activity: activity, type: ActivityType.pausedTask);
+          activity: activity, type: ActivityType.project);
     } else if (activity is Task) {
       return ActivityCardView(
           activity: activity, type: ActivityType.pausedTask);
     }
+    return null;
   }
+
+
+
+
+
+
 }

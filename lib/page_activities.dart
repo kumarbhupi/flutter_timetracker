@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:timetracker_flutter/page_intervals.dart';
-import 'package:timetracker_flutter/tree.dart' hide getTree;
+import 'package:timetracker_flutter/src/core/core.dart';
+import 'package:timetracker_flutter/src/view/view.dart';
+import 'package:timetracker_flutter/src/services/services.dart';
 import 'dart:async';
 
-// the old getTree()
-import 'package:timetracker_flutter/requests.dart';
-// has the new getTree() that sends an http request to the server
 
 class PageActivities extends StatefulWidget {
   int id;
@@ -58,7 +57,6 @@ class _PageActivitiesState extends State<PageActivities> {
             ),
             body: ListView.separated(
               // it's like ListView.builder() but better because it includes a separator between items
-              padding: const EdgeInsets.all(16.0),
               itemCount: snapshot.data.root.children.length,
               itemBuilder: (BuildContext context, int index) =>
                   _buildRow(snapshot.data.root.children[index], index),
@@ -85,6 +83,7 @@ class _PageActivitiesState extends State<PageActivities> {
         Duration(seconds: activity.duration).toString().split('.').first;
     // split by '.' and taking first element of resulting list removes the microseconds part
     if (activity is Project) {
+      return ActivityCardView(type: ActivityType.project, activity: activity , onPressAction: () =>_navigateDownActivities(activity.id),);
       return ListTile(
         title: Text('${activity.name}'),
         trailing: Text('$strDuration'),
@@ -95,7 +94,7 @@ class _PageActivitiesState extends State<PageActivities> {
       // at the moment is the same, maybe changes in the future
       Widget trailing;
       trailing = Text('$strDuration');
-
+      return IntervalCardView(activity: activity,);
       return ListTile(
         title: Text('${activity.name}'),
         trailing: trailing,
