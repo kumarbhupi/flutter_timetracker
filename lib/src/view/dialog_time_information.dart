@@ -79,8 +79,12 @@ class InformationTimeDialog extends StatelessWidget {
               ),
             ),
           );
-        },
-      );
-    }
-  }
-}
+        }, //builder
+      ); //showDialog
+    } //Future async
+    return FloatingActionButton(
+      onPressed: _showMyDialog,
+      child : Icon(Icons.access_alarm),
+    );
+  } //build
+} //class

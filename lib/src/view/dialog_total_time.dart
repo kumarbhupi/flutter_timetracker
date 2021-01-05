@@ -12,7 +12,7 @@ class TotalTimeDialog extends StatelessWidget {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Total Time'),
-            content: Text('__________________'),
+            content: Text('_______________'),
             actions: <Widget>[
               TextButton(
                 child: Text('Close'),
