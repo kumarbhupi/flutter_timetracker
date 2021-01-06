@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ActivityDialogView extends StatelessWidget {
+class ActivityDialogCreateView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<void> _showMyDialog() async {
@@ -75,7 +75,7 @@ class ActivityDialogView extends StatelessWidget {
 
     return FloatingActionButton(
       onPressed: _showMyDialog,
-      child: Text('Dialog'),
+      child : Icon(Icons.add),
     );
   }
 }
