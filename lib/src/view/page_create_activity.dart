@@ -47,73 +47,87 @@ class _CreateActivityViewState extends State<CreateActivityView> {
         title: Text('Create ${widget.name}'),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.only(bottom: 5.0),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Name: ",
-              ),
-            ),
-            Container(
-                margin: EdgeInsets.only(bottom: 10.0),
+        child: Container(
+          margin: EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.only(bottom: 5.0),
                 alignment: Alignment.centerLeft,
-                child: TextField(
-                  controller: _controllerName,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Insert Name Here',
-                  ),
-                )),
-            Container(
-              margin: EdgeInsets.only(bottom: 5.0),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Tags: ",
+                child: Text(
+                  "Name: ",
+                ),
               ),
-            ),
-            Row(
-              children: [
-                Flexible(
+              Container(
+                  margin: EdgeInsets.only(bottom: 10.0),
+                  alignment: Alignment.centerLeft,
                   child: TextField(
-                    controller: _controllerTagName,
+                    controller: _controllerName,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Insert Tags Here',
+                      labelText: 'Insert Name Here',
                     ),
+                  )),
+              Container(
+                margin: EdgeInsets.only(bottom: 5.0),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Tags: ",
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 10.0),
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: TextField(
+                        controller: _controllerTagName,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Insert Tags Here',
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                        icon: Icon(Icons.add_circle_outline),
+                        onPressed: () {
+                          setState(() {
+                            print(widget.tags);
+                            print(_controllerName.text);
+                            widget.tags
+                                .add(createNewTag(_controllerTagName.value.text));
+                          });
+                        })
+                  ],
+                ),
+              ),
+
+              Container(
+                margin: EdgeInsets.only(bottom: 10.0),
+                child: SingleChildScrollView(
+
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: widget.tags,
                   ),
                 ),
-                IconButton(
-                    icon: Icon(Icons.add_circle_outline),
-                    onPressed: () {
-                      setState(() {
-                        print(widget.tags);
-                        print(_controllerName.text);
-                        widget.tags
-                            .add(createNewTag(_controllerTagName.value.text));
-                      });
-                    })
-              ],
-            ),
-            Row(
-              children: widget.tags,
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 5.0),
-              alignment: Alignment.bottomCenter,
-              child: RaisedButton(
-                onPressed: () {
-                  create(widget.id, widget.name.toLowerCase(), _controllerName.value.text, []);
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Create', style: TextStyle(fontSize: 20)),
-                color: Colors.blue,
-                textColor: Colors.white,
-                elevation: 5,
               ),
-            ),
-          ],
+              Container(
+                margin: EdgeInsets.only(bottom: 5.0),
+                alignment: Alignment.bottomCenter,
+                child: RaisedButton(
+                  onPressed: () {
+                    create(widget.id, widget.name.toLowerCase(), _controllerName.value.text, []);
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Create', style: TextStyle(fontSize: 20)),
+                  color: Colors.blue,
+                  textColor: Colors.white,
+                  elevation: 5,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

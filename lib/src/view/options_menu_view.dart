@@ -5,7 +5,9 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class OptionsMenuView extends StatelessWidget {
   int id;
+
   OptionsMenuView({this.id});
+
   @override
   Widget build(BuildContext context) {
     return SpeedDial(
@@ -43,7 +45,12 @@ class OptionsMenuView extends StatelessWidget {
         SpeedDialChild(
           child: Icon(Icons.access_alarm, color: Colors.white),
           backgroundColor: Colors.green,
-          onTap: () => TotalTimeDialog().showMyDialog(context),
+          onTap: (){
+          Navigator.of(context)
+              .push(MaterialPageRoute<void>(
+          builder: (context) => InformationTimeDialog(),
+          ));
+        },
           label: 'Calculate total time',
           labelStyle: TextStyle(fontWeight: FontWeight.w500),
           labelBackgroundColor: Colors.green,
