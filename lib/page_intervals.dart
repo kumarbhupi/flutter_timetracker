@@ -46,6 +46,7 @@ class _PageIntervalsState extends State<PageIntervals> {
 
   @override
   void dispose() {
+    print('Cancel del interval');
     _timer.cancel();
     super.dispose();
   }

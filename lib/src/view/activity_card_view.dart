@@ -53,7 +53,7 @@ class _ActivityCardViewLState extends State<ActivityCardViewL> {
                         ActivityNameView(
                           activity: activity,
                         ),
-                        tagCardView(),
+                        TagCardView(),
                       ],
                     ),
                     ShowTimeView(
@@ -91,7 +91,7 @@ class _ActivityCardViewLState extends State<ActivityCardViewL> {
                         ActivityNameView(
                           activity: activity,
                         ),
-                        tagCardView(),
+                        TagCardView(),
                       ],
                     ),
                     ShowTimeView(
@@ -129,7 +129,7 @@ class _ActivityCardViewLState extends State<ActivityCardViewL> {
                         ActivityNameView(
                           activity: activity,
                         ),
-                        tagCardView(),
+                        TagCardView(),
                       ],
                     ),
                     ShowTimeView(
@@ -189,7 +189,7 @@ class ActivityCardView extends StatelessWidget {
                       ActivityNameView(
                         activity: activity,
                       ),
-                      tagCardView(),
+                      TagCardView(),
                     ],
                   ),
                   ShowTimeView(
@@ -227,7 +227,7 @@ class ActivityCardView extends StatelessWidget {
                       ActivityNameView(
                         activity: activity,
                       ),
-                      tagCardView(),
+                      TagCardView(),
                     ],
                   ),
                   ShowTimeView(
@@ -265,7 +265,7 @@ class ActivityCardView extends StatelessWidget {
                       ActivityNameView(
                         activity: activity,
                       ),
-                      tagCardView(),
+                      TagCardView(),
                     ],
                   ),
                   ShowTimeView(

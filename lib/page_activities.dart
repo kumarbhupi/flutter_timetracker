@@ -61,6 +61,16 @@ class _PageActivitiesState extends State<PageActivities> {
               separatorBuilder: (BuildContext context, int index) =>
                   const Divider(),
             ),
+            floatingActionButton: ActivitySelectorDialogView(
+              startTimer: (){
+              _activateTimer();
+            },
+            stopTimer: (){
+              if(_timer.isActive){
+                print('Hace esto?');
+                _timer.cancel();
+              }
+            },),
           );
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
@@ -87,66 +97,35 @@ class _PageActivitiesState extends State<PageActivities> {
         onPressCard: () => _navigateDownActivities(activity.id),
         onPressButton: () {},
       );
-      return ListTile(
-        title: Text('${activity.name}'),
-        trailing: Text('$strDuration'),
-        onTap: () => _navigateDownActivities(activity.id),
-      );
     } else if (activity is Task) {
       Task task = activity as Task;
       // at the moment is the same, maybe changes in the future
       Widget trailing;
       trailing = Text('$strDuration');
 
-      if(((activity as Task).active)){
+      if (((activity as Task).active)) {
         return ActivityCardView(
           type: ActivityType.playingTask,
           activity: activity,
-          onPressCard: () => _navigateDownIntervals(activity.id,(activity as Task).active),
+          onPressCard: () =>
+              _navigateDownIntervals(activity.id, (activity as Task).active),
           onPressButton: () {
             stop(activity.id);
             _refresh();
           },
         );
-      }else{
+      } else {
         return ActivityCardView(
           type: ActivityType.pausedTask,
           activity: activity,
-          onPressCard: () => _navigateDownIntervals(activity.id, (activity as Task).active),
+          onPressCard: () =>
+              _navigateDownIntervals(activity.id, (activity as Task).active),
           onPressButton: () {
             start(activity.id);
             _refresh();
           },
         );
       }
-      return ActivityCardView(
-        type: ActivityType.pausedTask,
-        activity: activity,
-        onPressCard: () => _navigateDownIntervals(activity.id, (activity as Task).active),
-        onPressButton: () {
-          if ((activity as Task).active) {
-            stop(activity.id);
-            _refresh();
-          } else {
-            start(activity.id);
-            _refresh();
-          }
-        },
-      );
-      return ListTile(
-        title: Text('${activity.name}'),
-        trailing: trailing,
-        onTap: () => _navigateDownIntervals(activity.id, (activity as Task).active),
-        onLongPress: () {
-          if ((activity as Task).active) {
-            stop(activity.id);
-            _refresh();
-          } else {
-            start(activity.id);
-            _refresh();
-          }
-        }, // TODO start/stop counting the time for tis task
-      );
     }
   }
 
@@ -188,6 +167,7 @@ class _PageActivitiesState extends State<PageActivities> {
   void dispose() {
     // "The framework calls this method when this State object will never build again"
     // therefore when going up
+    print('Lo hace en el activities?');
     _timer.cancel();
     super.dispose();
   }

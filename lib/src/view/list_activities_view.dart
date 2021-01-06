@@ -44,10 +44,10 @@ class ListActivitiesView extends StatelessWidget {
     //    Duration(seconds: activity.duration).toString().split('.').first;
     // split by '.' and taking first element of resulting list removes the microseconds part
     if (activity is Project) {
-      return ActivityCardView(
+      return ActivityCardViewL(
           activity: activity, type: ActivityType.project);
     } else if (activity is Task) {
-      return ActivityCardView(
+      return ActivityCardViewL(
           activity: activity, type: ActivityType.pausedTask);
     }
     return null;

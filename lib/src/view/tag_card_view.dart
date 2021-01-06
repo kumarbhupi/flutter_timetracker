@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-class tagCardView extends StatelessWidget {
+class TagCardView extends StatelessWidget {
+  TagCardView({this.tagName});
+  final String tagName;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,7 +18,7 @@ class tagCardView extends StatelessWidget {
           color: Color.fromRGBO(183, 253, 204, 1),
         ),
         child: new Text(
-            "Tag X",
+            "$tagName",
             style: TextStyle(
                 fontSize: 10.0
             )
