@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:timetracker_flutter/src/view/page_create_activity.dart';
 import 'package:timetracker_flutter/src/view/tag_card_view.dart';
+
 
 enum SingingCharacter { Project, Task }
 
@@ -54,11 +56,8 @@ class _ActivitySelectorRadioButtonState
 }
 
 class ActivitySelectorDialogView extends StatefulWidget {
-  ActivitySelectorDialogView({this.stopTimer, this.startTimer});
-
-  final VoidCallback startTimer;
-  final VoidCallback stopTimer;
-
+  ActivitySelectorDialogView({this.id});
+  int id;
   final selector = ActivitySelectorRadioButton();
   List<Widget> tags = List<Widget>();
 
@@ -101,9 +100,10 @@ class _ActivitySelectorDialogViewState
 
   @override
   Widget build(BuildContext context) {
-    Future<void> _showMyDialogCreate(SingingCharacter name, List<Widget> anotherList) async {
+    Future<void> _showMyDialogCreate(SingingCharacter name,
+        List<Widget> anotherList) async {
       String name =
-          selector.character == SingingCharacter.Project ? 'Project' : 'Task';
+      selector.character == SingingCharacter.Project ? 'Project' : 'Task';
 
       return showDialog<void>(
         context: context,
@@ -155,8 +155,8 @@ class _ActivitySelectorDialogViewState
                             print('NEW --> $anotherList');
                             setState(() {
                               print(widget.tags);
-                              widget.tags.add(createNewTag(_controllerTagName.value.text));
-                              widget.stopTimer();
+                              widget.tags.add(
+                                  createNewTag(_controllerTagName.value.text));
                             });
                           })
                     ],
@@ -171,8 +171,6 @@ class _ActivitySelectorDialogViewState
               TextButton(
                 child: Text('Create'),
                 onPressed: () {
-
-                  widget.startTimer();
                   Navigator.of(context).pop();
                 },
               ),
@@ -185,7 +183,7 @@ class _ActivitySelectorDialogViewState
     Future<void> _showMyDialog() async {
       return showDialog<void>(
         context: context,
-        barrierDismissible: false, // user must tap button!
+        barrierDismissible: true, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Create'),
@@ -196,8 +194,17 @@ class _ActivitySelectorDialogViewState
               TextButton(
                 child: Text('Continue'),
                 onPressed: () {
-                  //Navigator.of(context).pop();
-                  _showMyDialogCreate(selector.character, widget.tags);
+                  String name =
+                  selector.character == SingingCharacter.Project
+                      ? 'Project'
+                      : 'Task';
+                  Navigator.of(context).pop();
+                  Navigator.of(context)
+                      .push(MaterialPageRoute<void>(
+                    builder: (context) => CreateActivityView(name: name, id: widget.id,),
+                  ));
+
+                  //_showMyDialogCreate(selector.character, widget.tags);
                 },
               ),
             ],

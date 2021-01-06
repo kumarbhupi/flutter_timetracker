@@ -31,6 +31,18 @@ Future<Tree> getTree(int id) async {
   }
 }
 
+Future<void> create(int id, String type, String name, List<String> tags) async{
+  String uri = "$baseUrl/add?$id&$type&$name";
+  final response = await client.get(uri);
+  if (response.statusCode == 200) {
+    print("statusCode=$response.statusCode");
+  } else {
+    print("statusCode=$response.statusCode");
+    throw Exception('Failed to get children');
+  }
+
+}
+
 Future<void> start(int id) async {
   String uri = "$baseUrl/start?$id";
   final response = await client.get(uri);

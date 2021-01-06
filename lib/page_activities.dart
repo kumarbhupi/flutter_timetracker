@@ -61,16 +61,7 @@ class _PageActivitiesState extends State<PageActivities> {
               separatorBuilder: (BuildContext context, int index) =>
                   const Divider(),
             ),
-            floatingActionButton: ActivitySelectorDialogView(
-              startTimer: (){
-              _activateTimer();
-            },
-            stopTimer: (){
-              if(_timer.isActive){
-                print('Hace esto?');
-                _timer.cancel();
-              }
-            },),
+            floatingActionButton: ActivitySelectorDialogView(id: id,),
           );
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
