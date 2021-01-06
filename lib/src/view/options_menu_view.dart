@@ -4,6 +4,8 @@ import 'package:timetracker_flutter/src/view/view.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class OptionsMenuView extends StatelessWidget {
+  int id;
+  OptionsMenuView({this.id});
   @override
   Widget build(BuildContext context) {
     return SpeedDial(
@@ -33,7 +35,7 @@ class OptionsMenuView extends StatelessWidget {
         SpeedDialChild(
           child: Icon(Icons.add, color: Colors.white),
           backgroundColor: Colors.deepOrange,
-          onTap: () => ActivityDialogSelectorView().showMyDialog(context),
+          onTap: () => showMyDialog(context, id),
           label: 'Create a new activity',
           labelStyle: TextStyle(fontWeight: FontWeight.w500),
           labelBackgroundColor: Colors.deepOrangeAccent,

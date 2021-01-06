@@ -180,44 +180,50 @@ class _ActivitySelectorDialogViewState
       );
     }
 
-    Future<void> _showMyDialog() async {
-      return showDialog<void>(
-        context: context,
-        barrierDismissible: true, // user must tap button!
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Create'),
-            content: SingleChildScrollView(
-              child: selector,
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: Text('Continue'),
-                onPressed: () {
-                  String name =
-                  selector.character == SingingCharacter.Project
-                      ? 'Project'
-                      : 'Task';
-                  Navigator.of(context).pop();
-                  Navigator.of(context)
-                      .push(MaterialPageRoute<void>(
-                    builder: (context) => CreateActivityView(name: name, id: widget.id,),
-                  ));
 
-                  //_showMyDialogCreate(selector.character, widget.tags);
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
 
     return FloatingActionButton(
-      onPressed: _showMyDialog,
+      //onPressed: showMyDialog,
       child: Icon(Icons.add),
     );
   }
+
+
+}
+
+
+Future<void> showMyDialog(BuildContext context, int id) async {
+  final selector = ActivitySelectorRadioButton();
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: true, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Create'),
+        content: SingleChildScrollView(
+          child: selector,
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text('Continue'),
+            onPressed: () {
+              String name =
+              selector.character == SingingCharacter.Project
+                  ? 'Project'
+                  : 'Task';
+              Navigator.of(context).pop();
+              Navigator.of(context)
+                  .push(MaterialPageRoute<void>(
+                builder: (context) => CreateActivityView(name: name, id: id,),
+              ));
+
+              //_showMyDialogCreate(selector.character, widget.tags);
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
 
 /*class ActivitySelectDialogView extends StatelessWidget {

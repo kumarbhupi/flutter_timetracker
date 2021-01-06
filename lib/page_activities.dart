@@ -66,7 +66,7 @@ class _PageActivitiesState extends State<PageActivities> {
               separatorBuilder: (BuildContext context, int index) =>
                   const Divider(),
             ),
-            floatingActionButton: OptionsMenuView(),
+            floatingActionButton: OptionsMenuView(id: id,),
             );
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
