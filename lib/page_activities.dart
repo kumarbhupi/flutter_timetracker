@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:timetracker_flutter/main.dart';
 import 'package:timetracker_flutter/page_intervals.dart';
 import 'package:timetracker_flutter/src/core/core.dart';
-import 'package:timetracker_flutter/src/view/dialog_select_tracker.dart';
 import 'package:timetracker_flutter/src/view/view.dart';
 import 'package:timetracker_flutter/src/services/services.dart';
 import 'dart:async';
@@ -66,7 +63,7 @@ class _PageActivitiesState extends State<PageActivities> {
               separatorBuilder: (BuildContext context, int index) =>
                   const Divider(),
             ),
-            floatingActionButton: OptionsMenuView(id: id,),
+            floatingActionButton: OptionsMenuView(id: id, activities: snapshot.data.root.children,),
             );
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
@@ -153,10 +150,18 @@ class _PageActivitiesState extends State<PageActivities> {
   }
 
   void _activateTimer() {
-    _timer = Timer.periodic(Duration(seconds: periodeRefresh), (Timer t) {
-      futureTree = getTree(id);
-      setState(() {});
-    });
+    if(_timer == null){
+      _timer = Timer.periodic(Duration(seconds: periodeRefresh), (Timer t) {
+        futureTree = getTree(id);
+        setState(() {});
+      });
+    }
+    if(!_timer.isActive){
+      _timer = Timer.periodic(Duration(seconds: periodeRefresh), (Timer t) {
+        futureTree = getTree(id);
+        setState(() {});
+      });
+    }
   }
 
   @override

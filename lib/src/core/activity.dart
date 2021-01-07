@@ -10,6 +10,7 @@ abstract class Activity {
   int duration;
   String initialString;
   String finalString;
+  List<dynamic> tags;
   List<dynamic> children = List<dynamic>();
 
   Activity.fromJson(Map<String, dynamic> json)
@@ -19,5 +20,6 @@ abstract class Activity {
         finalDate = json['endTime']=='null' ? null : dateFormatter.parse(json['endTime']),
         initialString = json['startTime']=='null' ? '-' : json['startTime'],
         finalString = json['endTime']=='null' ? '-' : json['endTime'],
-        duration = json['duration'];
+        duration = json['duration'],
+        tags = json['tags'];
 }

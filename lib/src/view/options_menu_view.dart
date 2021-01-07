@@ -4,9 +4,10 @@ import 'package:timetracker_flutter/src/view/view.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class OptionsMenuView extends StatelessWidget {
+  List<dynamic> activities;
   int id;
 
-  OptionsMenuView({this.id});
+  OptionsMenuView({this.id, this.activities});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class OptionsMenuView extends StatelessWidget {
           onTap: (){
           Navigator.of(context)
               .push(MaterialPageRoute<void>(
-          builder: (context) => InformationTimeDialog(),
+          builder: (context) => InformationTimeDialog(id: id, activities: activities,),
           ));
         },
           label: 'Calculate total time',

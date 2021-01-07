@@ -1,4 +1,5 @@
 import 'dart:convert' as convert;
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:timetracker_flutter/src/core/core.dart';
 
@@ -31,8 +32,30 @@ Future<Tree> getTree(int id) async {
   }
 }
 
-Future<void> create(int id, String type, String name, List<String> tags) async{
+Future<int> getTotalDuration(int id, DateTime startDate, TimeOfDay startTime,
+    DateTime endDate, TimeOfDay endTime) async{
+  String uri =
+      "$baseUrl/get_duration?$id&${startDate.year}&${startDate.month}&${startDate.day}&${startTime.hour}&${startTime.minute}&${endDate.year}&${endDate.month}&${endDate.day}&${endTime.hour}&${endTime.minute}";
+  final response = await client.get(uri);
+
+  if (response.statusCode == 200) {
+    print("statusCode=$response.statusCode");
+    //print(response.body);
+    // If the server did return a 200 OK response, then parse the JSON.
+    Map<String, dynamic> decoded = convert.jsonDecode(response.body);
+    return decoded['duration'];
+  } else {
+    // If the server did not return a 200 OK response, then throw an exception.
+    print("statusCode=$response.statusCode");
+    throw Exception('Failed to the total duration');
+  }
+}
+
+Future<void> create(int id, String type, String name, List<String> tags) async {
   String uri = "$baseUrl/add?$id&$type&$name";
+  for (String tag in tags) {
+    uri = uri + "&$tag";
+  }
   final response = await client.get(uri);
   if (response.statusCode == 200) {
     print("statusCode=$response.statusCode");
@@ -40,7 +63,18 @@ Future<void> create(int id, String type, String name, List<String> tags) async{
     print("statusCode=$response.statusCode");
     throw Exception('Failed to get children');
   }
+}
 
+Future<void> createTags(int id, List<String> tags) async {
+  String uri = "$baseUrl/add_tags?$id";
+
+  final response = await client.get(uri);
+  if (response.statusCode == 200) {
+    print("statusCode=$response.statusCode");
+  } else {
+    print("statusCode=$response.statusCode");
+    throw Exception('Failed to get children');
+  }
 }
 
 Future<void> start(int id) async {

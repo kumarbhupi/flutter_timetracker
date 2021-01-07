@@ -9,6 +9,7 @@ class CreateActivityView extends StatefulWidget {
   final int id;
   final String name;
   List<Widget> tags = List<Widget>();
+  List<String> tagsName = List<String>();
 
   @override
   _CreateActivityViewState createState() => _CreateActivityViewState();
@@ -92,10 +93,9 @@ class _CreateActivityViewState extends State<CreateActivityView> {
                         icon: Icon(Icons.add_circle_outline),
                         onPressed: () {
                           setState(() {
-                            print(widget.tags);
-                            print(_controllerName.text);
                             widget.tags
                                 .add(createNewTag(_controllerTagName.value.text));
+                            widget.tagsName.add(_controllerTagName.value.text);
                           });
                         })
                   ],
@@ -117,7 +117,7 @@ class _CreateActivityViewState extends State<CreateActivityView> {
                 alignment: Alignment.bottomCenter,
                 child: RaisedButton(
                   onPressed: () {
-                    create(widget.id, widget.name.toLowerCase(), _controllerName.value.text, []);
+                    create(widget.id, widget.name.toLowerCase(), _controllerName.value.text, widget.tagsName);
                     Navigator.of(context).pop();
                   },
                   child: const Text('Create', style: TextStyle(fontSize: 20)),
