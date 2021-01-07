@@ -1,7 +1,5 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:timetracker_flutter/page_activities.dart';
-//import 'package:timetracker_flutter/src/view/task_project_card_view.dart';
 
 void main() {
   runApp(MyApp());
