@@ -10,22 +10,35 @@ class ActivityNameView extends StatelessWidget {
   Widget build(BuildContext context) {
     if (activity is Task) {
       return Container(
-        margin: EdgeInsets.all(15.0),
-        padding: EdgeInsets.all(10.0),
-        child: Text(
-          "${(activity as Task).name}",
-          style: TextStyle(fontSize: 15.0),
-        ),
+
+        child:
+          Container(
+            width: 140,
+            margin: EdgeInsets.only(left: 5.0),
+            padding: EdgeInsets.only(right: 10.0),
+            child: Text(
+              "${(activity as Task).name}",
+              style: TextStyle(fontSize: 15.0),
+            ),
+          ),
+
       );
     }
     if (activity is Project) {
       return Container(
-        margin: EdgeInsets.all(15.0),
-        padding: EdgeInsets.all(10.0),
-        child: Text(
-          "${(activity as Project).name}",
-          style: TextStyle(fontSize: 15.0),
-        ),
+
+
+        child:
+          Container(
+            width: 140,
+            margin: EdgeInsets.only(left: 5.0),
+            padding: EdgeInsets.only(right: 10.0),
+            child: Text(
+              "${(activity as Project).name}",
+              style: TextStyle(fontSize: 15.0),
+            ),
+          ),
+
       );
     }
     return Container(

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:timetracker_flutter/src/view/view.dart';
 import 'package:timetracker_flutter/src/core/core.dart';
@@ -82,9 +83,13 @@ class ActivityCardView extends StatelessWidget {
                       ActivityNameView(
                         activity: activity,
                       ),
-                      SingleChildScrollView(
-                        child: Row(
-                          children: _createAllTags((activity as Activity).tags),
+                      Container(
+                        width: 150.0,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: _createAllTags((activity as Activity).tags),
+                          ),
                         ),
                       ),
                     ],
@@ -125,9 +130,13 @@ class ActivityCardView extends StatelessWidget {
                       ActivityNameView(
                         activity: activity,
                       ),
-                      SingleChildScrollView(
-                        child: Row(
-                          children: _createAllTags((activity as Activity).tags),
+                      Container(
+                        width: 120.0,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: _createAllTags((activity as Activity).tags),
+                          ),
                         ),
                       ),
                     ],

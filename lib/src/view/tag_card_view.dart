@@ -6,7 +6,7 @@ class TagCardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(right: 5.0),
+        margin: EdgeInsets.all(5.0),
         padding: EdgeInsets.all(1.0),
         decoration: new BoxDecoration(
           boxShadow: [

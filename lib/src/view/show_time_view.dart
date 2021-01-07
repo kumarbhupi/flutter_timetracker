@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:timetracker_flutter/src/core/activity_type.dart';
 import 'package:timetracker_flutter/src/core/core.dart';
@@ -11,77 +12,92 @@ class ShowTimeView extends StatelessWidget {
   Widget build(BuildContext context) {
     switch(type){
       case ActivityType.project : {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Start'),
-            Text('${(activity as Activity).initialString}'),
-            SizedBox(height: 10.0),
-            Text('Last modification'),
-            Text('${(activity as Activity).finalString}'),
-            SizedBox(height: 10.0),
-          ],
+        return Container(
+          padding: EdgeInsets.only(right: 10),
+
+          width: 149,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Start'),
+              Text('${(activity as Activity).initialString}'),
+              SizedBox(height: 10.0),
+              Text('Last modification'),
+              Text('${(activity as Activity).finalString}'),
+              SizedBox(height: 10.0),
+            ],
+          ),
         );
 
       }
       break;
       case ActivityType.pausedTask : {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Start'),
-            Text('${(activity as Activity).initialString}'),
-            SizedBox(height: 10.0),
-            Text('Last modification'),
-            Text('${(activity as Activity).finalString}'),
-            SizedBox(height: 10.0),
-            Row(
-              children: [
-                Text('Status: '),
-                Container(
-                  margin: EdgeInsets.only(left: 3.0),
-                  width: 15.0,
-                  height: 15.0,
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    shape: BoxShape.circle,
+        return Container(
+          padding: EdgeInsets.only(right: 10),
+
+          width: 149,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Start'),
+              Text('${(activity as Activity).initialString}'),
+              SizedBox(height: 10.0),
+              Text('Last modification'),
+              Text('${(activity as Activity).finalString}'),
+              SizedBox(height: 10.0),
+              Row(
+                children: [
+                  Text('Status: '),
+                  Container(
+                    margin: EdgeInsets.only(left: 3.0),
+                    width: 15.0,
+                    height: 15.0,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      shape: BoxShape.circle,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         );
 
       }
       break;
       case ActivityType.playingTask : {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Start'),
-            Text('${(activity as Activity).initialString}'),
-            SizedBox(height: 10.0),
-            Text('Last modification'),
-            Text('${(activity as Activity).finalString}'),
-            SizedBox(height: 10.0),
-            Row(
-              children: [
-                Text('Status: '),
-                Container(
-                  margin: EdgeInsets.only(left: 3.0),
-                  width: 15.0,
-                  height: 15.0,
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    shape: BoxShape.circle,
+        return Container(
+          padding: EdgeInsets.only(right: 10),
+
+          width: 149,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Start'),
+              Text('${(activity as Activity).initialString}'),
+              SizedBox(height: 10.0),
+              Text('Last modification'),
+              Text('${(activity as Activity).finalString}'),
+              SizedBox(height: 10.0),
+              Row(
+                children: [
+                  Text('Status: '),
+                  Container(
+                    margin: EdgeInsets.only(left: 3.0),
+                    width: 15.0,
+                    height: 15.0,
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      shape: BoxShape.circle,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         );
       }
       break;

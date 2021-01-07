@@ -13,7 +13,7 @@ class PlayerButtonView extends StatelessWidget {
       case ActivityType.project:{
         return Container(
           height: 100.0,
-          margin: EdgeInsets.only(left: 30.0),
+          margin: EdgeInsets.only(left: 2.0),
           child: RaisedButton(
             onPressed: onPressAction,
             textColor: Colors.black,
