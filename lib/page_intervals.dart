@@ -63,18 +63,6 @@ class _PageIntervalsState extends State<PageIntervals> {
           return Scaffold(
             appBar: AppBar(
               title: Text(snapshot.data.root.name),
-              actions: <Widget>[
-                IconButton(
-                    icon: Icon(Icons.home),
-                    onPressed: () {
-                      while (Navigator.of(context).canPop()) {
-                        print("pop");
-                        Navigator.of(context).pop();
-                      }
-
-                      PageActivities(0);
-                    })
-              ],
             ),
             body: ListView.separated(
               // it's like ListView.builder() but better because it includes a separator between items

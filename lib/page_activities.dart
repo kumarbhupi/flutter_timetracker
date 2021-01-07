@@ -44,14 +44,15 @@ class _PageActivitiesState extends State<PageActivities> {
               actions: <Widget>[
                 IconButton(
                     icon: Icon(Icons.search),
-                    onPressed: () {
+                    onPressed: (){
+                      showSearch(context: context, delegate: Search([]));
+                    }),
+                    /*onPressed: () {
                       while (Navigator.of(context).canPop()) {
                         print("pop");
                         Navigator.of(context).pop();
                       }
-
-                      PageActivities(0);
-                    }),
+                      PageActivities(0);*/
                 //TODO other actions
               ],
             ),

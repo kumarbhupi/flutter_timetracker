@@ -32,6 +32,28 @@ Future<Tree> getTree(int id) async {
   }
 }
 
+Future<List<Tree>> getTreeByTag(String name) async{
+  String uri = "$baseUrl/find_by_tags?$name";
+
+  final response = await client.get(uri);
+
+  if (response.statusCode == 200) {
+    List<Tree> trees = List<Tree>();
+    print("statusCode=$response.statusCode");
+    //print(response.body);
+    // If the server did return a 200 OK response, then parse the JSON.
+    List<dynamic> jsonList = convert.jsonDecode(response.body);
+    for(var value in jsonList){
+      trees.add(Tree(value));
+    }
+    return trees;
+  } else {
+    // If the server did not return a 200 OK response, then throw an exception.
+    print("statusCode=$response.statusCode");
+    throw Exception('Failed to get children');
+  }
+}
+
 Future<int> getTotalDuration(int id, DateTime startDate, TimeOfDay startTime,
     DateTime endDate, TimeOfDay endTime) async{
   String uri =
@@ -76,6 +98,8 @@ Future<void> createTags(int id, List<String> tags) async {
     throw Exception('Failed to get children');
   }
 }
+
+
 
 Future<void> start(int id) async {
   String uri = "$baseUrl/start?$id";
