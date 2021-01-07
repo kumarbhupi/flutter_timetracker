@@ -66,6 +66,47 @@ class ActivityCardView extends StatelessWidget {
           );
         }
         break;
+      case ActivityType.activeProject:
+        {
+          return InkWell(
+            splashColor: Colors.blue.withAlpha(30),
+            onTap: onPressCard,
+            child: Card(
+              color: Colors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      ActivityNameView(
+                        activity: activity,
+                      ),
+                      SingleChildScrollView(
+                        child: Row(
+                          children: _createAllTags((activity as Activity).tags),
+                        ),
+                      ),
+                    ],
+                  ),
+                  ShowTimeView(
+                    type: ActivityType.project,
+                    activity: activity,
+                  ),
+                  Container(
+                    child: Align(
+                      child: PlayerButtonView(
+                        type: ActivityType.activeProject,
+                        onPressAction: onPressCard,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+        break;
 
       case ActivityType.playingTask:
         {
@@ -88,7 +129,8 @@ class ActivityCardView extends StatelessWidget {
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
-                            children: _createAllTags((activity as Activity).tags),
+                            children:
+                                _createAllTags((activity as Activity).tags),
                           ),
                         ),
                       ),
@@ -101,7 +143,6 @@ class ActivityCardView extends StatelessWidget {
                   Container(
                     child: Align(
                       child: PlayerButtonView(
-
                         type: ActivityType.playingTask,
                         onPressAction: onPressButton,
                       ),
@@ -135,7 +176,8 @@ class ActivityCardView extends StatelessWidget {
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
-                            children: _createAllTags((activity as Activity).tags),
+                            children:
+                                _createAllTags((activity as Activity).tags),
                           ),
                         ),
                       ),

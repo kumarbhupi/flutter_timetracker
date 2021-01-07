@@ -7,15 +7,12 @@ import 'package:timetracker_flutter/src/services/services.dart';
 import 'dart:async';
 
 // to avoid collision with an Interval class in another library
-
-
-
-
 class PageIntervals extends StatefulWidget {
   int id;
+  String name;
   bool active;
 
-  PageIntervals(this.id, this.active);
+  PageIntervals(this.id, this.active, this.name);
 
   @override
   _PageIntervalsState createState() => _PageIntervalsState();
@@ -62,7 +59,7 @@ class _PageIntervalsState extends State<PageIntervals> {
           int numChildren = snapshot.data.root.children.length;
           return Scaffold(
             appBar: AppBar(
-              title: Text(snapshot.data.root.name),
+              title: Text("${widget.name}/${snapshot.data.root.name}"),
             ),
             body: ListView.separated(
               // it's like ListView.builder() but better because it includes a separator between items
@@ -94,9 +91,6 @@ class _PageIntervalsState extends State<PageIntervals> {
     // this removes the microseconds part
     String strFinalDate = interval.finalDate.toString().split('.')[0];
     return IntervalCardView(activity: interval, number : index);
-    return ListTile(
-      title: Text('from ${strInitialDate} to ${strFinalDate}'),
-      trailing: Text('$strDuration'),
-    );
+
   }
 }

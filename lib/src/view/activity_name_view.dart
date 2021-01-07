@@ -26,8 +26,6 @@ class ActivityNameView extends StatelessWidget {
     }
     if (activity is Project) {
       return Container(
-
-
         child:
           Container(
             width: 140,

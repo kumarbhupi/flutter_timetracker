@@ -1,1 +1,1 @@
-enum ActivityType {project, pausedTask, playingTask}
+enum ActivityType {project,activeProject, pausedTask, playingTask}

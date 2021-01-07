@@ -10,6 +10,7 @@ abstract class Activity {
   int duration;
   String initialString;
   String finalString;
+  bool active;
   List<dynamic> tags;
   List<dynamic> children = List<dynamic>();
 
@@ -21,5 +22,6 @@ abstract class Activity {
         initialString = json['startTime']=='null' ? '-' : json['startTime'],
         finalString = json['endTime']=='null' ? '-' : json['endTime'],
         duration = json['duration'],
+        active = json['active'],
         tags = json['tags'];
 }

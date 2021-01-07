@@ -5,11 +5,11 @@ import 'package:timetracker_flutter/src/view/view.dart';
 import 'package:timetracker_flutter/src/services/services.dart';
 import 'dart:async';
 
-
 class PageActivities extends StatefulWidget {
   int id;
+  String parentName;
 
-  PageActivities(this.id);
+  PageActivities(this.id, this.parentName);
 
   @override
   _PageActivitiesState createState() => _PageActivitiesState();
@@ -27,6 +27,7 @@ class _PageActivitiesState extends State<PageActivities> {
     super.initState();
     id = widget.id;
     futureTree = getTree(id);
+
     _activateTimer();
   }
 
@@ -40,32 +41,28 @@ class _PageActivitiesState extends State<PageActivities> {
         if (snapshot.hasData) {
           return Scaffold(
             appBar: AppBar(
-              title: Text(snapshot.data.root.name),
+              title: Text("${widget.parentName}/${snapshot.data.root.name}"),
               actions: <Widget>[
                 IconButton(
                     icon: Icon(Icons.search),
-                    onPressed: (){
+                    onPressed: () {
                       showSearch(context: context, delegate: Search([]));
                     }),
-                    /*onPressed: () {
-                      while (Navigator.of(context).canPop()) {
-                        print("pop");
-                        Navigator.of(context).pop();
-                      }
-                      PageActivities(0);*/
-                //TODO other actions
               ],
             ),
             body: ListView.separated(
               // it's like ListView.builder() but better because it includes a separator between items
               itemCount: snapshot.data.root.children.length,
               itemBuilder: (BuildContext context, int index) =>
-                  _buildRow(snapshot.data.root.children[index], index),
+                  _buildRow(snapshot.data.root.children[index], index, snapshot.data.root.name),
               separatorBuilder: (BuildContext context, int index) =>
                   const Divider(),
             ),
-            floatingActionButton: OptionsMenuView(id: id, activities: snapshot.data.root.children,),
-            );
+            floatingActionButton: OptionsMenuView(
+              id: id,
+              activities: snapshot.data.root.children,
+            ),
+          );
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
         }
@@ -80,29 +77,31 @@ class _PageActivitiesState extends State<PageActivities> {
     );
   }
 
-  Widget _buildRow(Activity activity, int index) {
-    String strDuration =
-        Duration(seconds: activity.duration).toString().split('.').first;
-    // split by '.' and taking first element of resulting list removes the microseconds part
+  Widget _buildRow(Activity activity, int index, String name) {
     if (activity is Project) {
+      if (activity.active) {
+        return ActivityCardView(
+          type: ActivityType.activeProject,
+          activity: activity,
+          onPressCard: () =>
+              _navigateDownActivities(activity.id, name),
+          onPressButton: () {},
+        );
+      }
       return ActivityCardView(
         type: ActivityType.project,
         activity: activity,
-        onPressCard: () => _navigateDownActivities(activity.id),
+        onPressCard: () =>
+            _navigateDownActivities(activity.id, name),
         onPressButton: () {},
       );
     } else if (activity is Task) {
-      Task task = activity as Task;
-      // at the moment is the same, maybe changes in the future
-      Widget trailing;
-      trailing = Text('$strDuration');
-
-      if (((activity as Task).active)) {
+      if (((activity).active)) {
         return ActivityCardView(
           type: ActivityType.playingTask,
           activity: activity,
           onPressCard: () =>
-              _navigateDownIntervals(activity.id, (activity as Task).active),
+              _navigateDownIntervals(activity.id, (activity).active, name),
           onPressButton: () {
             stop(activity.id);
             _refresh();
@@ -113,7 +112,7 @@ class _PageActivitiesState extends State<PageActivities> {
           type: ActivityType.pausedTask,
           activity: activity,
           onPressCard: () =>
-              _navigateDownIntervals(activity.id, (activity as Task).active),
+              _navigateDownIntervals(activity.id, (activity).active, name),
           onPressButton: () {
             start(activity.id);
             _refresh();
@@ -123,10 +122,10 @@ class _PageActivitiesState extends State<PageActivities> {
     }
   }
 
-  void _navigateDownActivities(int childId) {
+  void _navigateDownActivities(int childId, String parentName) {
     Navigator.of(context)
         .push(MaterialPageRoute<void>(
-      builder: (context) => PageActivities(childId),
+      builder: (context) => PageActivities(childId, parentName),
     ))
         .then((var value) {
       _activateTimer();
@@ -134,10 +133,10 @@ class _PageActivitiesState extends State<PageActivities> {
     });
   }
 
-  void _navigateDownIntervals(int childId, bool active) {
+  void _navigateDownIntervals(int childId, bool active, String parentName) {
     Navigator.of(context)
         .push(MaterialPageRoute<void>(
-      builder: (context) => PageIntervals(childId, active),
+      builder: (context) => PageIntervals(childId, active, parentName),
     ))
         .then((var value) {
       _activateTimer();
@@ -151,13 +150,13 @@ class _PageActivitiesState extends State<PageActivities> {
   }
 
   void _activateTimer() {
-    if(_timer == null){
+    if (_timer == null) {
       _timer = Timer.periodic(Duration(seconds: periodeRefresh), (Timer t) {
         futureTree = getTree(id);
         setState(() {});
       });
     }
-    if(!_timer.isActive){
+    if (!_timer.isActive) {
       _timer = Timer.periodic(Duration(seconds: periodeRefresh), (Timer t) {
         futureTree = getTree(id);
         setState(() {});

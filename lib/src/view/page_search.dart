@@ -4,7 +4,6 @@ import 'package:timetracker_flutter/page_intervals.dart';
 import 'package:timetracker_flutter/src/services/services.dart';
 import 'package:timetracker_flutter/src/core/core.dart';
 
-
 class Search extends SearchDelegate {
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -33,10 +32,11 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    if(selectedActivity is Task){
-      return PageIntervals(selectedActivity.id, (selectedActivity as Task).active);
-    }else if(selectedActivity is Project){
-      return PageActivities(selectedActivity.id);
+    if (selectedActivity is Task) {
+      return PageIntervals(
+          selectedActivity.id, (selectedActivity as Task).active, "");
+    } else if (selectedActivity is Project) {
+      return PageActivities(selectedActivity.id, "");
     }
 
     return Container(
@@ -68,7 +68,7 @@ class Search extends SearchDelegate {
     return FutureBuilder<List<Tree>>(
       future: futureTree,
       builder: (context, snapshot) {
-        if(snapshot.hasData){
+        if (snapshot.hasData) {
           return ListView.builder(
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
@@ -83,7 +83,6 @@ class Search extends SearchDelegate {
                   },
                 );
               });
-
         }
         return ListView.builder(
             itemCount: suggestionList.length,
