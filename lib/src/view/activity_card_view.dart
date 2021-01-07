@@ -96,6 +96,7 @@ class ActivityCardView extends StatelessWidget {
                   Container(
                     child: Align(
                       child: PlayerButtonView(
+
                         type: ActivityType.playingTask,
                         onPressAction: onPressButton,
                       ),

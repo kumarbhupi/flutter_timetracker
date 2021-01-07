@@ -88,63 +88,83 @@ class _InformationTimeDialogState extends State<InformationTimeDialog> {
         margin: EdgeInsets.all(10.0),
         child: SingleChildScrollView(
           child: Container(
+            padding: EdgeInsets.all(5.0),
             margin: EdgeInsets.all(10.0),
             child: Column(
               children: [
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text('Start date: '),
-                    ),
+
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "${selectedDate.toLocal()}".split(' ')[0],
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                        Container(
+                          margin: EdgeInsets.only(right: 7.0),
+                          alignment: Alignment.centerLeft,
+                          child: Text('Start date: '),
                         ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        RaisedButton(
-                          onPressed: () => _selectDate(context), // Refer step 3
-                          child: Text(
-                            'Select date',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          color: Colors.greenAccent,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "${selectedDate.toLocal()}".split(' ')[0],
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              width: 20.0,
+                            ),
+
+                            Container(
+                              margin: EdgeInsets.only(left: 10.0),
+                              child: RaisedButton(
+                                onPressed: () => _selectDate(context), // Refer step 3
+                                child: Text(
+                                  'Select date',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                color: Colors.greenAccent,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text('Start time: '),
-                    ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "${selectedTime.hour}:${selectedTime.minute}",
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                        Container(
+                          margin: EdgeInsets.only(right: 7.0),
+                          alignment: Alignment.centerLeft,
+                          child: Text('Start time: '),
                         ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        RaisedButton(
-                          onPressed: () => _selectTime(context), // Refer step 3
-                          child: Text(
-                            'Select time',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          color: Colors.greenAccent,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 55.0,
+                              child: Text(
+                                "${selectedTime.hour}:${selectedTime.minute}",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+
+                            Container(
+                              padding: EdgeInsets.only(left: 72.0),
+                              child: RaisedButton(
+                                onPressed: () => _selectTime(context), // Refer step 3
+                                child: Text(
+                                  'Select time',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                color: Colors.greenAccent,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -153,97 +173,120 @@ class _InformationTimeDialogState extends State<InformationTimeDialog> {
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text('End date: '),
-                    ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "${selectedEndDate.toLocal()}".split(' ')[0],
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                        Container(
+                          margin: EdgeInsets.only(right: 14.0),
+                          alignment: Alignment.centerLeft,
+                          child: Text('End date: '),
                         ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        RaisedButton(
-                          onPressed: () => _selectEndDate(context),
-                          // Refer step 3
-                          child: Text(
-                            'Select date',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          color: Colors.greenAccent,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "${selectedEndDate.toLocal()}".split(' ')[0],
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              width: 20.0,
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(left: 10.0),
+                              child: RaisedButton(
+                                onPressed: () => _selectEndDate(context),
+                                // Refer step 3
+                                child: Text(
+                                  'Select date',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                color: Colors.greenAccent,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text('End time: '),
-                    ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "${selectedEndTime.hour}:${selectedEndTime.minute}",
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                        Container(
+                          margin: EdgeInsets.only(right: 14.0),
+                          alignment: Alignment.centerLeft,
+                          child: Text('End time: '),
                         ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        RaisedButton(
-                          onPressed: () => _selectEndTime(context),
-                          // Refer step 3
-                          child: Text(
-                            'Select time',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          color: Colors.greenAccent,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 55.0,
+                              child: Text(
+                                "${selectedEndTime.hour}:${selectedEndTime.minute}",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+
+                            Container(
+                              padding: EdgeInsets.only(left: 72.0),
+                              child: RaisedButton(
+                                onPressed: () => _selectEndTime(context),
+                                // Refer step 3
+                                child: Text(
+                                  'Select time',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                color: Colors.greenAccent,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ],
                 ),
-                DropdownButton<String>(
-                  value: dropdownValue,
-                  icon: Icon(Icons.arrow_downward),
-                  iconSize: 24,
-                  elevation: 16,
-                  style: TextStyle(color: Colors.deepPurple),
-                  underline: Container(
-                    height: 2,
-                    color: Colors.deepPurpleAccent,
-                  ),
-                  onChanged: (String newValue) {
-                    setState(() {
-                      dropdownValue = newValue;
-                    });
-                  },
-                  items: _getDropDownMenuItems(),
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: RaisedButton(
-                    onPressed: () {
-                      Future<int> totalDuration = getTotalDuration(
-                        nameIdMap[dropdownValue], selectedDate, selectedTime,
-                      selectedEndDate, selectedEndTime);
-                      showDurationDialog(context, totalDuration);
-                    },
-                    // Refer step 3
-                    child: Text(
-                      'Search',
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
+                Container(
+                  margin: EdgeInsets.only(top: 15.0),
+                  child: DropdownButton<String>(
+                    value: dropdownValue,
+                    icon: Icon(Icons.arrow_downward),
+                    iconSize: 24,
+                    elevation: 16,
+                    style: TextStyle(color: Colors.deepPurple),
+                    underline: Container(
+                      height: 2,
+                      color: Colors.deepPurpleAccent,
                     ),
-                    color: Colors.blue[500],
+                    onChanged: (String newValue) {
+                      setState(() {
+                        dropdownValue = newValue;
+                      });
+                    },
+                    items: _getDropDownMenuItems(),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 10.0),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: RaisedButton(
+                      onPressed: () {
+                        Future<int> totalDuration = getTotalDuration(
+                          nameIdMap[dropdownValue], selectedDate, selectedTime,
+                        selectedEndDate, selectedEndTime);
+                        showDurationDialog(context, totalDuration);
+                      },
+                      // Refer step 3
+                      child: Text(
+                        'Search',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                      color: Colors.blue[500],
+                    ),
                   ),
                 )
               ], //children

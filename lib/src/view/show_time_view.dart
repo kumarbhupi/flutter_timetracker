@@ -39,8 +39,9 @@ class ShowTimeView extends StatelessWidget {
             SizedBox(height: 10.0),
             Row(
               children: [
-                Text('Status'),
+                Text('Status: '),
                 Container(
+                  margin: EdgeInsets.only(left: 3.0),
                   width: 15.0,
                   height: 15.0,
                   decoration: BoxDecoration(
@@ -68,8 +69,9 @@ class ShowTimeView extends StatelessWidget {
             SizedBox(height: 10.0),
             Row(
               children: [
-                Text('Status'),
+                Text('Status: '),
                 Container(
+                  margin: EdgeInsets.only(left: 3.0),
                   width: 15.0,
                   height: 15.0,
                   decoration: BoxDecoration(

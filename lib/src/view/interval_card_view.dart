@@ -8,7 +8,9 @@ class IntervalCardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Card(
+
       color: Color.fromRGBO(183, 253, 204, 1),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -39,9 +41,11 @@ class IntervalCardView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
               Text('${(activity as myInterval.Interval).initialString}'),
               Text('${(activity as myInterval.Interval).finalString}'),
               Text('${(activity as myInterval.Interval).duration}'),
+
             ],
           )
         ],
